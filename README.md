@@ -157,9 +157,9 @@ choose nothing follows the SDK: a machine's first four controls own the four kno
 are alternates the OP-XY reaches by pressing an encoder (`"control": k` names which); on the Field they are the
 same knob with Shift.
 
-## Screen colours: three looks in every pack
+## Screen colours: five looks in every pack
 
-Every translated screen carries three looks, chosen on the Field, kept across restarts:
+Every translated screen carries five looks, chosen on the Field, kept across restarts:
 
 | Look | What takes a knob's colour |
 | --- | --- |
@@ -170,9 +170,23 @@ Every translated screen carries three looks, chosen on the Field, kept across re
 
 Choose it in the Field's settings (shift + COM, T1, PACKS, the pack's name, `colours`), or on the machine's page:
 **hold all four knobs down and tap shift**; the page says which look is on. Only grey parts are ever recoloured,
-so a machine that chose its own colours keeps them. Which knob moves what is measured on your computer
-by turning each of the eight values in the machine's own screen code with a note playing. `--colours MODE` on a
-build (or `setup --colours MODE`) sets the look a pack starts with.
+so a machine that chose its own colours (bitflip) keeps them under `own`. Which knob moves what is measured on your
+computer by turning each of the eight values in the machine's own screen code with a note playing.
+`--colours MODE` on a build (or `setup --colours MODE`) sets the look a pack starts with.
+
+Host renders of the five looks (same path the pack uses on the Field), left to right:
+
+**nexus**
+
+![nexus colour modes](docs/previews/nexus-colours.png)
+
+**hurdygurdy**
+
+![hurdygurdy colour modes](docs/previews/hurdygurdy-colours.png)
+
+**bitflip**
+
+![bitflip colour modes](docs/previews/bitflip-colours.png)
 
 ## Text
 
