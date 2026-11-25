@@ -11,3 +11,4 @@ x2f.config.json
 *.map
 *.wav
 *.png
+!docs/previews/*.png
