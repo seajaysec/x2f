@@ -4,20 +4,11 @@ Turns an **Open-XY machine** (a synth written for the OP-XY) into an **open-fiel
 OP-1 Field: a `.pack` file you copy onto the Field beside `base.pack`. The synth shows up in the engine list
 (shift + T1), with the machine's own screen when one exists.
 
-**v1.** Synths (including percussive / drum-kit machines filed as synth engines). Effects and sampling are not
-in this release. Pull requests welcome.
+**v1** covers synths. open-field has no drum-engine slot, so Open-XY drum kits land under synths too. Effects and
+sampling are not in this release. Heavy ports (rings and similar) can slow the Field UI while audio still runs —
+expected for v1, not a broken pack. Pull requests welcome.
 
-Unofficial community tool. Not affiliated with Teenage Engineering. See [NOTICE](NOTICE).
-
-## Know before you load
-
-| | |
-| --- | --- |
-| **Heavy synths** | Some ports (rings and similar) are costly on the Field. Expect visible UI slowdown; that is a v1 limit, not a broken pack. Audio quality was preferred over chasing cycles. |
-| **Drums** | open-field has no drum-engine slot today. Percussive Open-XY kits appear under **synths**, playing across the keyboard as the OP-XY drum track does. |
-| **Effects** | Not supported in v1. Anticipated in an upcoming release. |
-| **Sampling** | Not supported in v1. Anticipated in an upcoming release. |
-| **Players** | Note generators (chords, splitter, …) are not translated yet. |
+Unofficial; not affiliated with Teenage Engineering. See [NOTICE](NOTICE).
 
 ## Quick start
 
@@ -34,7 +25,7 @@ Then copy `out/<name>/<name>.pack` into the Field's `packs` folder (disk mode), 
 ## What you need
 
 x2f is one Python script (`x2f.py`, with `face.py` and the `runtime/` folder). It uses the Python standard
-library only: no `pip install`, no virtual environment. Clone or copy the folder anywhere.
+library only: no `pip`, `uv`, or virtual environment. Clone or copy the folder anywhere.
 
 | Need | Why | x2f can get it? |
 | --- | --- | --- |
@@ -44,9 +35,6 @@ library only: no `pip install`, no virtual environment. Clone or copy the folder
 | **A C++17 compiler for your computer** | measures which knob owns which part of the screen, and renders the check | no. macOS: `xcode-select --install`. Debian/Ubuntu: `sudo apt install g++`. Fedora: `sudo dnf install gcc-c++`. Windows: LLVM (`clang++`) or MSYS2's mingw-w64 `g++`, on PATH. MSVC's `cl` is not supported |
 | **Open-XY machines** (only for `check`) | something to translate; `check` uses `karplus` | yes (`clone`) |
 | **git** (only for `clone`) | x2f's `clone` runs it | no: git-scm.com, or your package manager |
-
-The Blackfin toolchain is the open-source cross-compiler open-xy fetches. x2f does not ship Teenage Engineering
-firmware or proprietary DSP blobs; it only invokes that toolchain and open-field's pack builder on machines you supply.
 
 ## Pointing x2f at things
 
@@ -244,20 +232,16 @@ so they sort after `base.pack` (the set below uses `x2f-<name>.pack`).
 
 ## What is not done yet
 
-- Declared cycles are the most allowed, not measured: pass `--cycles` once you know. Heavy synths will still
-  feel slow in the UI even when audio continues.
-- Effects and sampling engines: deferred to a later release (see above).
+- Effects, sampling, and players (note generators): not in v1.
+- Declared cycles are the most allowed, not measured: pass `--cycles` once you know.
 - Velocity, tempo (the machine sees no tempo and uses its own fallback), and a synth's presets (as Field sounds)
   are not translated. Stereo synths are untested.
 - Screen: drawn 1:1 (both screens are 480 wide) with no re-layout; the bottom band can overlap art drawn low on
-  a panel. `display()` is told the envelope and held notes are unknown when the machine asks for them that way.
-- The machine is compiled with `-fno-schedule-insns2`: the compiler's instruction pairing produced pairs the
-  assembler refuses (anomaly 05000074). The code is a little slower for it.
-- `clone open_xy` (clone + toolchain fetch) should be tried end-to-end on a clean machine; Windows and Linux
-  paths are written for but less exercised than macOS.
+  a panel.
+- The machine is compiled with `-fno-schedule-insns2` (assembler anomaly 05000074), so it runs a little slower.
+- Windows and Linux paths are written for but less exercised than macOS.
 
 ## Contributing
 
-PRs are welcome: lighter screens, measured cycles, effect and sampler support, player/sequencer mapping, and
-docs that keep the caveats honest. Keep private machine tables, firmware, and local config out of the tree
-(`x2f.config.json` and `out/` are gitignored on purpose).
+PRs welcome. Keep private machine tables, firmware, and local config out of the tree (`x2f.config.json` and
+`out/` are gitignored on purpose).
