@@ -1,0 +1,13 @@
+out/
+field/
+__pycache__/
+*.py[cod]
+.DS_Store
+x2f.config.json
+*.pack
+*.elf
+*.bin
+*.o
+*.map
+*.wav
+*.png

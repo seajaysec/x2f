@@ -1,0 +1,10 @@
+x2f is an unofficial community tool. It is not affiliated with, endorsed by,
+or connected to Teenage Engineering.
+
+This repository contains converter source only. It does not ship Teenage
+Engineering firmware, sample content, or proprietary SDK binaries.
+
+Building a pack requires separate checkouts of open-field and open-xy (and
+open-xy's Blackfin toolchain). Those projects publish their own licenses.
+Open-XY machines you point x2f at are yours to supply; only translate and
+redistribute machines you have the right to use.
